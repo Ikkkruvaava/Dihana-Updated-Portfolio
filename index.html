@@ -12,17 +12,19 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Dihana Febin - Digital Marketer | Kerala, India">
-    <meta property="og:description" content="I blend SEO, Meta Ads, content, and design to build brand presence that people actually notice.">
+    <meta property="og:description"
+        content="I blend SEO, Meta Ads, content, and design to build brand presence that people actually notice.">
     <meta property="og:image" content="asset/images/logo/logo.webp">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dihana Febin - Digital Marketer | Kerala, India">
-    <meta name="twitter:description" content="I blend SEO, Meta Ads, content, and design to build brand presence that people actually notice.">
+    <meta name="twitter:description"
+        content="I blend SEO, Meta Ads, content, and design to build brand presence that people actually notice.">
     <meta name="twitter:image" content="asset/images/logo/logo.webp">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
+
     <meta name="google-site-verification" content="FfzVsyaS2M5ojeVmNI3qwKlkP6yqjM7mHMN9lL-_twA" />
 
     <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.css">
@@ -442,7 +444,6 @@
                 <div class="tf-container">
                     <div class="row">
                         <div class="offset-xxl-5 col-xxl-7 offset-xl-4 col-xl-7 offset-lg-2 col-lg-8">
-                            <div class="text-body-1 infor split-text split-lines-transform">Kerala, India</div>
                             <div class="main-title">
                                 <div class="text-body-1 dot-before subtitle">Digital Marketer</div>
                                 <h1 class="title split-text effect-right">
@@ -549,8 +550,7 @@
                                 <div class="works-wrap">
                                     <div class="works-item scrolling-effect effectLeft">
                                         <a class="image" href="#contact">
-                                            <img class="lazyload"
-                                                src="asset/images/works/SocialMediaMarketing1.webp"
+                                            <img class="lazyload" src="asset/images/works/SocialMediaMarketing1.webp"
                                                 data-src="asset/images/works/SocialMediaMarketing1.webp"
                                                 alt="Social Media Growth Campaign">
                                         </a>
@@ -573,8 +573,7 @@
                                     </div>
                                     <div class="works-item scrolling-effect effectLeft">
                                         <a class="image" href="#contact">
-                                            <img class="lazyload"
-                                                src="asset/images/works/SEO&Content.webp"
+                                            <img class="lazyload" src="asset/images/works/SEO&Content.webp"
                                                 data-src="asset/images/works/SEO&Content.webp"
                                                 alt="SEO Content Strategy">
                                         </a>
@@ -596,8 +595,7 @@
                                     </div>
                                     <div class="works-item scrolling-effect effectLeft">
                                         <a class="image" href="#contact">
-                                            <img class="lazyload"
-                                                src="asset/images/works/PaidAdvertising.webp"
+                                            <img class="lazyload" src="asset/images/works/PaidAdvertising.webp"
                                                 data-src="asset/images/works/PaidAdvertising.webp"
                                                 alt="Meta Ads Campaign">
                                         </a>
@@ -1327,6 +1325,58 @@
     <script src="asset/js/plugin.js"></script>
     <script src="asset/js/lightbox.min.js"></script>
     <script src="asset/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.scroll-to');
+            const sections = [];
+            
+            navLinks.forEach(link => {
+                const targetId = link.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    const section = document.querySelector(targetId);
+                    if (section && !sections.includes(section)) {
+                        sections.push(section);
+                    }
+                }
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-30% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeSectionId = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${activeSectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    const targetHref = this.getAttribute('href');
+                    navLinks.forEach(l => {
+                        if(l.getAttribute('href') === targetHref) {
+                            l.classList.add('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
